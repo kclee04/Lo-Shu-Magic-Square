@@ -17,4 +17,4 @@ Lo Shu Magic Square Quiz using C:
 * Continuously generate till a magic square is found. Output:<br>
 Attempt: 43890<br>Magic square found!<br>
 [ 4 9 2 ]<br>[ 3 5 7 ]<br>[ 8 1 6 ]<br>
-<sub>Note: Randomly generating a magic square will take a long time. If you want to test the other functions above, I recommend uncommenting some of the test cases under main in magicMain.c<sub>
+<sub>Note: If you want to test the other functions by themselves, I recommend uncommenting some of the test cases under main in magicMain.c<sub>
