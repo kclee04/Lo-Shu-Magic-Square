@@ -4,11 +4,6 @@
 
 int square[3][3] = {0};
 
-int randomNumGenerator(){
-    int num = (rand() % 9) + 1;
-    return num;
-}
-
 int isMagic(int square[3][3]){
     int sum;
     //check rows
@@ -44,25 +39,22 @@ void printGrid(int square[3][3]){
     }
 }
 
-int numberNotFound(int randomNum, int *number){
-    for(int i=0; i<9; i++){
-        if(randomNum == number[i]) return 0;
+void mixUpNumbers(int num[9]){
+    for(int i = 0; i<9;i++){
+        int randomNum=(rand() % 9)+1;
+        int temp = num[i];
+        num[i] = num[randomNum];
+        num[randomNum]=temp;
     }
-    return 1;
 }
 
 void generateSquare(){
-    int numbers[9]={0};
+    int num[9]= {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    mixUpNumbers(num);
     int count = 0;
-    srand(time(0));
     for(int i=0; i<3; i++){
         for(int j=0; j<3; j++){
-            int randomNum = randomNumGenerator();
-            while(numberNotFound(randomNum, numbers) != 1){
-                randomNum = randomNumGenerator();
-            }
-            numbers[count]=randomNum;
-            square[i][j] = randomNum;
+            square[i][j] = num[count];
             count ++;
         }
     }
@@ -71,7 +63,7 @@ void generateSquare(){
 int main(){
     int found = 0;
     int count = 0;
-    
+    srand(time(NULL));
     //Uncomment to test if the square is magic
     // int loShu [3][3] = {
     //     {4, 9, 2},
@@ -95,12 +87,13 @@ int main(){
     //randomly generate until magic square is found
     //comment from while to printGrid if you'd like to test other functions
     while(found != 1){
-        count++;
-        printf("Attempts: %d\n", count);
         generateSquare();
+        count++;
+        //printf("Attempts: %d\n", count);
         if(isMagic(square)==1) 
             found = 1;
     }
+    printf("Attempts: %d\n", count);
     printf("Magic square found!\n");
     printGrid(square);
 }
